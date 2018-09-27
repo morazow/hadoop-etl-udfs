@@ -2,18 +2,64 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>pom</packaging>
 
 	<groupId>com.exasol</groupId>
 	<artifactId>exa-hadoop-etl-udfs</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+    <name>Hadoop ETL UDFs</name>
+    <description>
+        The Hadoop ETL UDFs are the main way to load data from Hadoop into EXASOL
+    </description>
+    <url>https://github.com/EXASOL/hadoop-etl-udfs</url>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<hadoop.version>2.6.0-cdh5.11.0</hadoop.version>
-		<hive.version>1.1.0-cdh5.11.0</hive.version>
-	</properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+
+        <mvn.checkstyle.version>3.0.0</mvn.checkstyle.version>
+        <mvn.checkstyle.config>checkstyle/modified_googlestyle_checks.xml</mvn.checkstyle.config>
+        <checkstyle.version>8.12</checkstyle.version>
+
+        <hadoop.version>2.6.0-cdh5.11.0</hadoop.version>
+        <hive.version>1.1.0-cdh5.11.0</hive.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${mvn.checkstyle.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>${mvn.checkstyle.config}</configLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failOnViolation>true</failOnViolation>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <repository>

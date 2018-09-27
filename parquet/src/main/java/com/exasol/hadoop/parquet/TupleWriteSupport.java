@@ -1,16 +1,15 @@
 package com.exasol.hadoop.parquet;
 
+import java.util.HashMap;
+
 import org.apache.hadoop.conf.Configuration;
+
 import org.apache.parquet.hadoop.api.WriteSupport;
 import org.apache.parquet.io.api.RecordConsumer;
 import org.apache.parquet.schema.MessageType;
 import org.apache.parquet.schema.MessageTypeParser;
 
-import java.util.HashMap;
-
-/**
- * Extends WriteSupport to support Tuple (see Tuple.java).
- */
+/** Extends WriteSupport to support Tuple (see Tuple.java). */
 public class TupleWriteSupport extends WriteSupport<Tuple> {
     private MessageType schema;
     private TupleWriter writer;
@@ -25,7 +24,8 @@ public class TupleWriteSupport extends WriteSupport<Tuple> {
     }
 
     public static MessageType getSchema(Configuration configuration) {
-        return MessageTypeParser.parseMessageType(configuration.get(PARQUET_SCHEMA_PROPERTY_NAME));
+        return MessageTypeParser.parseMessageType(
+                configuration.get(PARQUET_SCHEMA_PROPERTY_NAME));
     }
 
     public WriteContext init(Configuration configuration) {

@@ -6,7 +6,8 @@ import parquet.schema.PrimitiveType;
 import parquet.schema.Type;
 
 /**
- * Writes Tuple (see Tuple.java) fields to RecordConsumer for TupleWriteSupport (TupleWriteSupport.java).
+ * Writes Tuple (see Tuple.java) fields to RecordConsumer for TupleWriteSupport
+ * (TupleWriteSupport.java).
  */
 public class TupleWriter {
     private final RecordConsumer recordConsumer;
@@ -17,6 +18,7 @@ public class TupleWriter {
         this.schema = schema;
     }
 
+    /** Write tuple to the record consumer. */
     public void write(Tuple tuple) {
         recordConsumer.startMessage();
         writeTuple(tuple, schema);
@@ -28,13 +30,13 @@ public class TupleWriter {
             Type fieldType = type.getType(index);
             String fieldName = fieldType.getName();
             // empty fields have to be omitted
-            if (tuple.isNull(index))
+            if (tuple.isNull(index)) {
                 continue;
+            }
             recordConsumer.startField(fieldName, index);
             if (fieldType.isPrimitive()) {
-                tuple.writePrimitiveValue(recordConsumer, index, (PrimitiveType)fieldType);
-            }
-            else {
+                tuple.writePrimitiveValue(recordConsumer, index, (PrimitiveType) fieldType);
+            } else {
                 recordConsumer.startGroup();
                 writeTuple(tuple.getTuple(index), fieldType.asGroupType());
                 recordConsumer.endGroup();
