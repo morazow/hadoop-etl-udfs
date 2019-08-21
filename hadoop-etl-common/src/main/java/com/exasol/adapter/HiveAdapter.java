@@ -1,5 +1,11 @@
 package com.exasol.adapter;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.exasol.ExaConnectionInformation;
 import com.exasol.ExaMetadata;
 import com.exasol.adapter.capabilities.Capabilities;
@@ -17,12 +23,6 @@ import com.exasol.adapter.sql.SqlStatementSelect;
 import com.exasol.adapter.sql.SqlTable;
 import com.exasol.hadoop.hive.HiveMetastoreService;
 import com.exasol.utils.UdfUtils;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 

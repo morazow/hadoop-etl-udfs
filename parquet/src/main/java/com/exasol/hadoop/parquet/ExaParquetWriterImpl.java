@@ -1,10 +1,10 @@
 package com.exasol.hadoop.parquet;
 
-import com.exasol.ExaIterator;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.exasol.ExaIterator;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

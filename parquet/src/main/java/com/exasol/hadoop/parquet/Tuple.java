@@ -1,9 +1,5 @@
 package com.exasol.hadoop.parquet;
 
-import com.exasol.ExaDataTypeException;
-import com.exasol.ExaIterationException;
-import com.exasol.ExaIterator;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -12,6 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.JulianFields;
 import java.util.Arrays;
 import java.util.List;
+
+import com.exasol.ExaDataTypeException;
+import com.exasol.ExaIterationException;
+import com.exasol.ExaIterator;
 
 import org.apache.hadoop.hive.ql.io.parquet.timestamp.NanoTime;
 
