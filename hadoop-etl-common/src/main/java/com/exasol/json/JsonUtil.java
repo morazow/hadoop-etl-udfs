@@ -14,27 +14,27 @@ import javax.json.stream.JsonGenerator;
 
 public class JsonUtil {
 
-  public static JsonObject getJsonObject(String data) throws Exception {
-    JsonReader jr = Json.createReader(new StringReader(data));
-    JsonObject obj = jr.readObject();
-    jr.close();
-    return obj;
-  }
+    public static JsonObject getJsonObject(String data) throws Exception {
+        JsonReader jr = Json.createReader(new StringReader(data));
+        JsonObject obj = jr.readObject();
+        jr.close();
+        return obj;
+    }
 
-  public static JsonArray getJsonArray(String data) throws Exception {
-    JsonReader jr = Json.createReader(new StringReader(data));
-    JsonArray arr = jr.readArray();
-    jr.close();
-    return arr;
-  }
+    public static JsonArray getJsonArray(String data) throws Exception {
+        JsonReader jr = Json.createReader(new StringReader(data));
+        JsonArray arr = jr.readArray();
+        jr.close();
+        return arr;
+    }
 
-  public static String prettyJson(JsonObject obj) {
-    Map<String, Boolean> config = new HashMap<>();
-    config.put(JsonGenerator.PRETTY_PRINTING, true);
-    StringWriter strWriter = new StringWriter();
-    PrintWriter pw = new PrintWriter(strWriter);
-    JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(pw);
-    jsonWriter.writeObject(obj);
-    return strWriter.toString();
-  }
+    public static String prettyJson(JsonObject obj) {
+        Map<String, Boolean> config = new HashMap<>();
+        config.put(JsonGenerator.PRETTY_PRINTING, true);
+        StringWriter strWriter = new StringWriter();
+        PrintWriter pw = new PrintWriter(strWriter);
+        JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(pw);
+        jsonWriter.writeObject(obj);
+        return strWriter.toString();
+    }
 }

@@ -49,45 +49,45 @@ public class UdfUtils {
     }
 
     public static byte[] base64ToByteArray(String base64Str) {
-      return DatatypeConverter.parseBase64Binary(base64Str);
+        return DatatypeConverter.parseBase64Binary(base64Str);
     }
 
     public static String writeTempFile(byte[] data, String path, String prefix, String suffix)
-      throws Exception {
-      File file = File.createTempFile(prefix, suffix, new File(path));
-      file.deleteOnExit();
-      FileOutputStream out = new FileOutputStream(file);
-      out.write(data);
-      out.close();
-      return file.getCanonicalPath();
+        throws Exception {
+        File file = File.createTempFile(prefix, suffix, new File(path));
+        file.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(file);
+        out.write(data);
+        out.close();
+        return file.getCanonicalPath();
     }
 
-  public static void printClassPath() {
-    System.out.println("Classpath:");
-    ClassLoader cl = ClassLoader.getSystemClassLoader();
+    public static void printClassPath() {
+        System.out.println("Classpath:");
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
 
-    URL[] urls = ((URLClassLoader) cl).getURLs();
+        URL[] urls = ((URLClassLoader) cl).getURLs();
 
-    for (URL url : urls) {
-      System.out.println(". " + url.getFile());
+        for (URL url : urls) {
+            System.out.println(". " + url.getFile());
+        }
     }
-  }
 
-  public static Object getInstanceByName(String className)
-      throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-    Class<?> clazz = Class.forName(className);
-    return clazz.newInstance();
-  }
-
-  public static String getOptionalStringParameter(
-      ExaMetadata meta, ExaIterator iter, int paramIndex, String defaultValue)
-      throws ExaIterationException, ExaDataTypeException {
-    String val = defaultValue;
-    if (meta.getInputColumnCount() > paramIndex) {
-      if (iter.getString(paramIndex) != null && iter.getString(paramIndex).length() > 0) {
-        val = iter.getString(paramIndex);
-      }
+    public static Object getInstanceByName(String className)
+        throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class<?> clazz = Class.forName(className);
+        return clazz.newInstance();
     }
-    return val;
-  }
+
+    public static String getOptionalStringParameter(
+            ExaMetadata meta, ExaIterator iter, int paramIndex, String defaultValue)
+        throws ExaIterationException, ExaDataTypeException {
+        String val = defaultValue;
+        if (meta.getInputColumnCount() > paramIndex) {
+            if (iter.getString(paramIndex) != null && iter.getString(paramIndex).length() > 0) {
+                val = iter.getString(paramIndex);
+            }
+        }
+        return val;
+    }
 }
