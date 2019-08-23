@@ -44,6 +44,11 @@ public class ExaMetadataDummy implements ExaMetadata {
     }
 
     @Override
+    public String getScopeUser() {
+        throw new NotImplementedException("Not yet implemented");
+    }
+
+    @Override
     public String getCurrentSchema() {
         throw new NotImplementedException("Not yet implemented");
     }

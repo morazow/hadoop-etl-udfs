@@ -29,4 +29,5 @@ public class HdfsServiceTest {
                     causeMessage.contains("No FileSystem for scheme: broken"));
         }
     }
+
 }

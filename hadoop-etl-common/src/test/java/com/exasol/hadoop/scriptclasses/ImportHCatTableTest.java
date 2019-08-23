@@ -61,14 +61,14 @@ public class ImportHCatTableTest {
             + " "
             + meta.getScriptSchema()
             + ".IMPORT_HIVE_TABLE_FILES("
-            + "    hdfspath, input_format, serde, column_info, partition_info, serde_props, "
-            + " hdfs_server_port, hdfs_user_or_service_principal, auth_type, conn_name, "
-            + " output_columns, enable_rpc_encryption, debug_address)"
+            + "hdfspath, input_format, serde, column_info, partition_info, serde_props, "
+            + "hdfs_server_port, hdfs_user_or_service_principal, auth_type, conn_name, "
+            + "output_columns, enable_rpc_encryption, debug_address)"
             + " FROM ("
             + " SELECT "
             + meta.getScriptSchema()
             + ".HCAT_TABLE_FILES('hcat_db', 'hcat_table', 'hcat_address', 'hdfs_user', "
-            + "           'hcat_user', nproc(), '', '', '', '', '', 'false', '')"
+            + "'hcat_user', nproc(), '', '', '', '', '', 'false', '')"
             + ") GROUP BY import_partition;";
         sqlExpected = normalizeSql(sqlExpected);
 

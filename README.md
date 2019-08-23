@@ -1,6 +1,6 @@
 # Hadoop ETL UDFs
 
-[![Build Status](https://travis-ci.org/EXASOL/hadoop-etl-udfs.svg?branch=master)](https://travis-ci.org/EXASOL/hadoop-etl-udfs)
+[![Build Status](https://travis-ci.org/exasol/hadoop-etl-udfs.svg?branch=master)](https://travis-ci.org/exasol/hadoop-etl-udfs)
 
 
 ###### Please note that this is an open source project which is officially supported by Exasol. For any questions, you can contact our support team. Please note, however, that the EXPORT functionality is still in BETA mode.
@@ -69,3 +69,5 @@ Please see the [EXPORT details](doc/export.md) for a full description.
 ### Frequent Issues
 
 * In case you cannot connect to certain parts of Hadoop it is a good idea to test the DNS hostname resolution and TCP/IP connectivity to all hosts and ports of Hadoop (HCatalog, HDFS, and Kerberos servers if used). For this you can use the python script in [solution 325](https://www.exasol.com/support/browse/SOL-325). Note that this script is designed for testing http connections, so you can ignore the http check failures.
+
+* Google DataProc Integration [issues](./doc/dataproc-issues.md).

@@ -1,10 +1,13 @@
 package com.exasol.utils;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.stream.Stream;
 import javax.xml.bind.DatatypeConverter;
 
 import com.exasol.ExaDataTypeException;
@@ -14,7 +17,9 @@ import com.exasol.ExaMetadata;
 
 public class UdfUtils {
 
-    /** Forward stdout to the an debug output service. */
+    /**
+     * Forward stdout to the an debug output service.
+     */
     public static void attachToOutputService(String ip, int port) {
         // Start before: python udf_debug.py
         try {
@@ -66,10 +71,29 @@ public class UdfUtils {
         System.out.println("Classpath:");
         ClassLoader cl = ClassLoader.getSystemClassLoader();
 
-        URL[] urls = ((URLClassLoader) cl).getURLs();
+        URL[] urls = urlsFromClassLoader(cl);
 
         for (URL url : urls) {
             System.out.println(". " + url.getFile());
+        }
+    }
+
+    private static URL[] urlsFromClassLoader(ClassLoader classLoader) {
+        if (classLoader instanceof URLClassLoader) {
+            return ((URLClassLoader) classLoader).getURLs();
+        }
+
+        return Stream
+            .of(ManagementFactory.getRuntimeMXBean().getClassPath().split(File.pathSeparator))
+            .map(UdfUtils::toURL).toArray(URL[]::new);
+    }
+
+    private static URL toURL(String path) {
+        try {
+            return new File(path).toURI().toURL();
+        } catch (MalformedURLException exception) {
+            throw new IllegalArgumentException("URL could not be created from path "
+                    + path, exception);
         }
     }
 
